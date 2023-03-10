@@ -12,7 +12,7 @@ class Dictionary extends Model
     protected $table = "dictionary";
     
     protected $casts = [
-        'text' => 'array',
+        'value' => 'array',
         'tag' => 'array',
     ];
 

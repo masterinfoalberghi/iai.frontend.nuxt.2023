@@ -21,3 +21,4 @@ use App\Http\Controllers\ApiController;
 // });
 
 Route::get('/slugs', [ApiController::class, 'routingIA']);
+Route::post('/subscribe', [ApiController::class, 'subscribe']);

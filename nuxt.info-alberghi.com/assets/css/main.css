@@ -1,3 +1,72 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/** Link */
+a, a:visited {
+    @apply text-sky-500 !underline;
+}
+a:hover, a:focus {
+    @apply text-sky-600 !no-underline;
+}
+
+/** Icons */
+.icon-ia { @apply fill-ia; filter: invert(59%) sepia(53%) saturate(597%) hue-rotate(173deg) brightness(99%) contrast(91%);}
+.icon-ia-disabled { @apply fill-gray-300; }
+
+.icon-orange   { filter: invert(76%) sepia(85%) saturate(535%) hue-rotate(337deg) brightness(100%) contrast(98%);}
+.icon-lime-500 { filter: invert(59%) sepia(100%) saturate(373%) hue-rotate(41deg) brightness(98%) contrast(95%);}
+.icon-red-500  { filter: invert(49%) sepia(10%) saturate(7426%) hue-rotate(330deg) brightness(92%) contrast(104%);}
+.icon-ia-gray  { filter: invert(74%) sepia(19%) saturate(658%) hue-rotate(158deg) brightness(85%) contrast(88%); }
+
+
+/** form **/
+label { @apply text-gray-500 align-middle; }
+
+input[type="email"],
+input[type="number"],
+input[type="password"],
+input[type="text"] {
+   @apply w-full p-3 rounded-md border-gray-300 border-2 shadow-sm outline-none focus:border-iaf;
+}
+
+input[type="checkbox"] {@apply w-4 h-4 bg-gray-50 rounded border border-gray-300;}
+
+input[type="number"].icon,
+input[type="email"].icon,
+input[type="password"].icon,
+input[type="text"].icon {
+    @apply pl-12;
+}
+
+input[type="number"].icons,
+input[type="email"].icons,
+input[type="password"].icons,
+input[type="text"].icons {
+    @apply px-12;
+}
+
+input[type="number"].icon-right,
+input[type="email"].icon-right,
+input[type="password"].icon-right,
+input[type="text"].icon-right {
+    @apply pr-12;
+}
+
+.p-error { @apply fill-red-500; }
+input[type="number"].p-error,
+input[type="email"].p-error,
+input[type="password"].p-error,
+input[type="text"].p-error {
+    @apply text-red-500 border-red-300 focus:border-red-500;
+}
+
+/** Button */
+.button {@apply  p-3 rounded outline-0 text-white bg-ia hover:bg-iah disabled:opacity-50 disabled:hover:bg-ia;}
+.button-sm {@apply text-sm px-3 py-2 }
+.button-icon {@apply absolute right-3 top-0 bottom-0 inset-y-0 flex items-center outline-0 !bg-transparent;}
+
+.input-icon {@apply absolute left-3 top-0 bottom-0 inset-y-0 flex items-center;}
+.input-icon-right {@apply absolute right-3 top-0 bottom-0 inset-y-0 flex items-center;}
+.social {@apply p-4 mt-2 mx-2 rounded-full border-2 border-ia shadow-sm inline-flex;}
+.social span {@apply m-2;} 

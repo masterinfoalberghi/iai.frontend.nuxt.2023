@@ -16,11 +16,12 @@ class DictionaryResource extends JsonResource
     
     public function toArray($request)
     {   
-    
+        
+        $locale = App::getLocale();
+
         return [
             "key" => $this->key,
-            "value" => $this->value,
-            "code" => $this->code 
+            "value" => isset($this->value["*"]) ? $this->value["*"] : (isset($this->value[$locale]) ? $this->value[$locale] : "nokey: " . $this->key),
         ];
     }
 }

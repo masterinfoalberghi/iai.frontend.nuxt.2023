@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Throwable;
 use App\Models\Slug;
 use App\Models\Dictionary;
 use Illuminate\Http\Request;
@@ -26,25 +27,7 @@ class ApiController extends Controller
         /** 404 La pagina non esiste */
         if (!$slug) {
 
-            $error = new \stdClass;
-            $error->locale = $locale;
-            $error->url = $path;
             
-            $error->statusCode = "404";
-            $error->statusMessage = "Page Not Found";
-            $error->message = "Questa pagina non è stata trovata";
-            $error->stack = "";
-
-            $error->slug = [
-                "metatag" => [
-                    "seo" => [
-                        "title" => "404 Page not found",
-                        "description" => "404 Page not found",
-                    ]
-                ]
-            ];
-
-            return response()->json($error);
             
         } else {
 
@@ -61,7 +44,7 @@ class ApiController extends Controller
             
             $object = new \stdClass;
             $object->slug = $slug;
-            // $object->dictionary = $dictionary;
+            $object->dictionary = $dictionary;
 
             return response()->json($object);
 
@@ -70,5 +53,49 @@ class ApiController extends Controller
        
 
     }
+
+    /**
+     * Chiama l'iscrizione alla newsletter 
+     * 
+     * @access public
+     * @param Request $request
+     * @return JSON
+     */
+    
+     public function subscribe (Request $request)
+     {
+        
+        
+         $email = $request->get('email');
+         $IDList = "1";
+         $IDGroup = "31,50";
+         $RequiredConfirmation = false;
+         $ReturnCode = 0;
+         $server_response = '';
+ 
+         try
+         {
+ 
+             $console_url = 'http://a4g6g.s21.it/frontend/xmlsubscribe.aspx?email='
+                 .urldecode($email)
+                 .'&list='   .$IDList
+                 .'&group='  .$IDGroup
+                 .'&confirm='.$RequiredConfirmation.
+                  '&retCode='.$ReturnCode;
+ 
+             $server_request = curl_init($console_url);
+             curl_setopt($server_request, CURLOPT_RETURNTRANSFER, 1);
+             $server_response = curl_exec($server_request);
+             curl_close($server_request);
+            
+             return response()->json(["data" => $server_response]);
+ 
+         } catch (Throwable $ex) {
+ 
+            return response()->json($server_response,500);
+             
+         }
+ 
+     }
 
 }

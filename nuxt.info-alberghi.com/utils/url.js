@@ -9,6 +9,14 @@ let getLangByUrl = (url) => {
 
 }
 
+let getUrlByLang = (locale) => {
+
+    if (locale == "it") { return "/"; }
+    return "/" + locale + "/";     
+
+}
+
 export {
-    getLangByUrl
+    getLangByUrl,
+    getUrlByLang
 }
